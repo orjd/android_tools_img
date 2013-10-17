@@ -127,13 +127,13 @@ kernel_offset = 0x8000
 base = kernel_addr - kernel_offset
 ramdisk_offset = ramdisk_addr - base
 second_offset = second_addr - base
-cmd = "  mkbootimg --kernel kernel --ramdisk ramdisk.gz --pagesize %d --base 0x%x --kernel_offset 0x%x --ramdisk_offset 0x%x" % (page_size, base, kernel_offset, ramdisk_offset)
+cmd = "  python repack-boot-img.py --kernel kernel --ramdisk ramdisk.gz --pagesize %d --base %x --kernel_offset %x --ramdisk_offset %x" % (page_size, base, kernel_offset, ramdisk_offset)
 if len(cmdline) > 0:
     cmd += " --cmdline %s" % cmdline
 if len(name) > 0:
     cmd += " --board %s" % name
 if o > 0:
-    cmd += " --second second --second_offset 0x%x" % second_offset
+    cmd += " --second second --second_offset %x" % second_offset
 if p > 0:
     cmd += " --dt devicetree"
 print(cmd)
